@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
 from sklearn import ensemble
 from sklearn.metrics import mean_absolute_error
 from sklearn.externals import joblib
@@ -33,7 +32,7 @@ houses_af=pd.get_dummies(houses, columns=['garage_type','city'])
 del houses_af['sale_price']
 
 #make it array without attribut name
- x=houses_af.values
+x=houses_af.values
 
 #get only the target value for train
 y=houses['sale_price'].values
@@ -50,7 +49,7 @@ model = ensemble.GradientBoostingRegressor(
     max_features=0.1,
     loss='huber'
 )
-model.fit(X_train, y_train)
+model.fit(x_train, y_train)
 
 # Save the trained model to a file so we can use it in other programs
 joblib.dump(model, 'trained_model.pkl')
